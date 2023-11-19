@@ -73,10 +73,10 @@ public class LoginForm extends JDialog{
 
             if (resultSet.next()) {
                 user = new User();
-                user.name = resultSet.getString("name");
+                user.firstName = resultSet.getString("firstName");
+                user.lastName = resultSet.getString("lastName");
                 user.email = resultSet.getString("email");
                 user.phone = resultSet.getString("phone");
-                user.address = resultSet.getString("address");
                 user.password = resultSet.getString("password");
             }
 
@@ -95,10 +95,9 @@ public class LoginForm extends JDialog{
         LoginForm loginForm = new LoginForm(null);
         User user = loginForm.user;
         if (user != null) {
-            System.out.println("Successful Authentication of: " + user.name);
+            System.out.println("Successful Authentication of: " + user.lastName + " " + user.firstName);
             System.out.println("          Email: " + user.email);
             System.out.println("          Phone: " + user.phone);
-            System.out.println("          Address: " + user.address);
         }
         else {
             System.out.println("Authentication canceled");

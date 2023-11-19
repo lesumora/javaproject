@@ -34,10 +34,10 @@
         </constraints>
         <properties>
           <font size="18"/>
-          <text value="Name"/>
+          <text value="First Name"/>
         </properties>
       </component>
-      <component id="3cd37" class="javax.swing.JTextField" binding="tfName">
+      <component id="3cd37" class="javax.swing.JTextField" binding="tfFirstName">
         <constraints>
           <grid row="1" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -45,6 +45,7 @@
         </constraints>
         <properties>
           <font size="18"/>
+          <text value=""/>
         </properties>
       </component>
       <component id="5fa6a" class="javax.swing.JLabel">
@@ -53,10 +54,10 @@
         </constraints>
         <properties>
           <font size="18"/>
-          <text value="Email"/>
+          <text value="Last Name"/>
         </properties>
       </component>
-      <component id="cc210" class="javax.swing.JTextField" binding="tfEmail">
+      <component id="cc210" class="javax.swing.JTextField" binding="tfLastName">
         <constraints>
           <grid row="2" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -72,10 +73,10 @@
         </constraints>
         <properties>
           <font size="18"/>
-          <text value="Phone"/>
+          <text value="Email"/>
         </properties>
       </component>
-      <component id="67f3e" class="javax.swing.JTextField" binding="tfPhone">
+      <component id="67f3e" class="javax.swing.JTextField" binding="tfEmail">
         <constraints>
           <grid row="3" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -91,10 +92,10 @@
         </constraints>
         <properties>
           <font size="18"/>
-          <text value="Address"/>
+          <text value="Phone"/>
         </properties>
       </component>
-      <component id="835fa" class="javax.swing.JTextField" binding="tfAddress">
+      <component id="835fa" class="javax.swing.JTextField" binding="tfPhone">
         <constraints>
           <grid row="4" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>

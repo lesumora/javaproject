@@ -1,5 +1,5 @@
 package com.enrollment;
 
 public class User {
-    public String name, email, phone, address, password;
+    public String firstName, lastName, email, phone, password;
 }

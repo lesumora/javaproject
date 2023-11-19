@@ -10,10 +10,10 @@ import java.sql.PreparedStatement;
 import java.sql.Statement;
 
 public class RegistrationForm extends JDialog{
-    private JTextField tfName;
+    private JTextField tfFirstName;
+    private JTextField tfLastName;
     private JTextField tfEmail;
     private JTextField tfPhone;
-    private JTextField tfAddress;
     private JPasswordField pfPassword;
     private JPasswordField pfConfirmPassword;
     private JButton btnRegister;
@@ -46,14 +46,14 @@ public class RegistrationForm extends JDialog{
     }
 
     private void registerUser() {
-        String name = tfName.getText();
+        String firstName = tfFirstName.getText();
+        String lastName = tfLastName.getText();
         String email = tfEmail.getText();
         String phone = tfPhone.getText();
-        String address = tfAddress.getText();
         String password = String.valueOf(pfPassword.getPassword());
         String confirmPassword = String.valueOf(pfConfirmPassword.getPassword());
 
-        if(name.isEmpty() || email.isEmpty() || phone.isEmpty() || address.isEmpty() || password.isEmpty()){
+        if(firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || phone.isEmpty() || password.isEmpty()){
             JOptionPane.showMessageDialog(this,
                     "Please fill in all fields.",
                     "Try again",
@@ -69,7 +69,7 @@ public class RegistrationForm extends JDialog{
             return;
         }
 
-        user = addUserToDatabase(name, email, phone, address, password);
+        user = addUserToDatabase(firstName, lastName, email, phone, password);
         if(user != null){
             dispose();
         }else {
@@ -81,7 +81,7 @@ public class RegistrationForm extends JDialog{
     }
 
     public User user;
-    private User addUserToDatabase(String name, String email, String phone, String address, String password){
+    private User addUserToDatabase(String firstName, String lastName, String email, String phone, String password){
         User user = null;
         String DB_URL = "jdbc:mysql://localhost:3306/enrollment";
         String USERNAME = "root";
@@ -92,23 +92,23 @@ public class RegistrationForm extends JDialog{
             //Connected to database successfully...
 
             Statement stmt = conn.createStatement();
-            String sql = "INSERT INTO users (name, email, phone, address, password)" +
+            String sql = "INSERT INTO users (firstName, lastName, email, phone, password)" +
                     "VALUES (?, ?, ?, ?, ?)";
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(1, name);
-            preparedStatement.setString(2, email);
-            preparedStatement.setString(3, phone);
-            preparedStatement.setString(4, address);
+            preparedStatement.setString(1, firstName);
+            preparedStatement.setString(2, lastName);
+            preparedStatement.setString(3, email);
+            preparedStatement.setString(4, phone);
             preparedStatement.setString(5, password);
 
             //Insert row into the table
             int addedRows = preparedStatement.executeUpdate();
             if(addedRows > 0){
                 user = new User();
-                user.name = name;
+                user.firstName = firstName;
+                user.lastName = lastName;
                 user.email = email;
                 user.phone = phone;
-                user.address = address;
                 user.password = password;
             }
 
@@ -125,7 +125,7 @@ public class RegistrationForm extends JDialog{
         RegistrationForm registrationForm = new RegistrationForm(null);
         User user = registrationForm.user;
         if (user != null) {
-            System.out.println("Successful registration of: " + user.name);
+            System.out.println("Successful registration of: " + user.firstName + " " + user.lastName);
         }
         else {
             System.out.println("Registration canceled");

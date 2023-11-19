@@ -12,7 +12,7 @@ import java.sql.Statement;
 public class DashboardForm extends JFrame{
     private JPanel dashboardPanel;
     private JLabel lbAdmin;
-    private JButton btnRegister;
+    private JButton btnEnroll;
 
     public DashboardForm() {
         setTitle("Dashboard");
@@ -21,14 +21,14 @@ public class DashboardForm extends JFrame{
         setSize(700, 500);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        boolean hasRegisterdUsers = connectToDatabase();
-        if (hasRegisterdUsers) {
+        boolean hasRegisteredUsers = connectToDatabase();
+        if (hasRegisteredUsers) {
             //show Login form
             LoginForm loginForm = new LoginForm(this);
             User user = loginForm.user;
 
             if (user != null) {
-                lbAdmin.setText("User: " + user.name);
+                lbAdmin.setText("User: " + user.firstName + " " + user.lastName);
                 setLocationRelativeTo(null);
                 setVisible(true);
             }
@@ -42,7 +42,7 @@ public class DashboardForm extends JFrame{
             User user = registrationForm.user;
 
             if (user != null) {
-                lbAdmin.setText("User: " + user.name);
+                lbAdmin.setText("Student: " + user.firstName + " " + user.lastName);
                 setLocationRelativeTo(null);
                 setVisible(true);
             }
@@ -50,24 +50,19 @@ public class DashboardForm extends JFrame{
                 dispose();
             }
         }
-        btnRegister.addActionListener(new ActionListener() {
+        btnEnroll.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                RegistrationForm registrationForm = new RegistrationForm(DashboardForm.this);
-                User user = registrationForm.user;
-
-                if (user != null) {
-                    JOptionPane.showMessageDialog(DashboardForm.this,
-                            "New user: " + user.name,
-                            "Successful Registration",
-                            JOptionPane.INFORMATION_MESSAGE);
-                }
+                dispose();
+                AcademicInformation academicInformation = new AcademicInformation();
+                academicInformation.setLocationRelativeTo(null);
+                academicInformation.setVisible(true);
             }
         });
     }
 
     private boolean connectToDatabase() {
-        boolean hasRegistredUsers = false;
+        boolean hasRegisteredUsers = false;
 
         final String MYSQL_SERVER_URL = "jdbc:mysql://localhost:3306/";
         final String DB_URL = "jdbc:mysql://localhost:3306/enrollment";
@@ -87,10 +82,10 @@ public class DashboardForm extends JFrame{
             statement = conn.createStatement();
             String sql = "CREATE TABLE IF NOT EXISTS users ("
                     + "id INT( 10 ) NOT NULL PRIMARY KEY AUTO_INCREMENT,"
-                    + "name VARCHAR(200) NOT NULL,"
+                    + "firstName VARCHAR(200) NOT NULL,"
+                    + "lastName VARCHAR(200) NOT NULL,"
                     + "email VARCHAR(200) NOT NULL UNIQUE,"
                     + "phone VARCHAR(200),"
-                    + "address VARCHAR(200),"
                     + "password VARCHAR(200) NOT NULL"
                     + ")";
             statement.executeUpdate(sql);
@@ -102,7 +97,7 @@ public class DashboardForm extends JFrame{
             if (resultSet.next()) {
                 int numUsers = resultSet.getInt(1);
                 if (numUsers > 0) {
-                    hasRegistredUsers = true;
+                    hasRegisteredUsers = true;
                 }
             }
 
@@ -113,7 +108,7 @@ public class DashboardForm extends JFrame{
             e.printStackTrace();
         }
 
-        return hasRegistredUsers;
+        return hasRegisteredUsers;
     }
 
     public static void main(String[] args) {
